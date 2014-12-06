@@ -6,20 +6,19 @@ import com.logsense.client.LogSense;
 import com.logsense.client.entities.enums.LocationTypeEnum;
 
 public abstract class LocationEntity implements IEntity {
-	
+
 	private String system;
 	private String solution;
-	
-	private String title;
+
 	private String name;
-	
+
 	protected LocationTypeEnum type;
 
 	private List<ParameterEntity> inputs;
 	private List<ParameterEntity> outputs;
-	
+
 	private List<LocationEntity> locations;
-	
+
 	@Override
 	public String toJson() {
 		return LogSense.gson.toJson(this);
@@ -51,14 +50,6 @@ public abstract class LocationEntity implements IEntity {
 
 	public LocationTypeEnum getType() {
 		return type;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public List<ParameterEntity> getInputs() {

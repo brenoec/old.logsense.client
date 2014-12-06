@@ -22,32 +22,32 @@ public class LogSense {
 	public LogSense(String url) {
 		this.url = url;
 	}
-	
+
 	public HttpResponse log(IEntity value) throws ClientProtocolException, IOException {
-		StringEntity json = new StringEntity("{ \"interaction\" : " + gson.toJson(value) + " }");
-		
-		System.out.println("[LogSense][information]\t" + "{ \"interaction\" : " + gson.toJson(value) + " }");
-		
+		StringEntity json = new StringEntity("{\"interaction\":" + gson.toJson(value) + "}");
+
+		System.out.println("[LogSense][information]\t" + "{\"interaction\":" + gson.toJson(value) + "}");
+
 		HttpPost post = new HttpPost(url);
 		post.setEntity(json);
 		post.setHeader("Content-type", "application/json");
-		
+
 		HttpClient client = HttpClients.createDefault();
-		
+
 		HttpResponse response = null;
-		
+
 		try {
 			response = client.execute(post);
-			
+
 			int statusCode = response.getStatusLine().getStatusCode();
-			
+
 			if (statusCode < 200 || statusCode >= 300) {
 				System.out.println("[LogSense][warning]\t" + response.getStatusLine());
 			}
 		} catch (HttpHostConnectException e) {
 			System.out.println("[LogSense][error]\t" + e.getMessage());
 		}
-		
+
 		return response;
 	}
 

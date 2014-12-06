@@ -8,7 +8,7 @@ public class InteractionEntity implements IEntity {
 	
 	private String name;
 	private String description;
-	private String status;
+	private String status = "";
 	
 	private List<LocationEntity> locations;
 	
@@ -37,8 +37,8 @@ public class InteractionEntity implements IEntity {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void addStatus(String status) {
+		this.status += String.format("%s ", status);
 	}
 
 	public List<LocationEntity> getLocations() {

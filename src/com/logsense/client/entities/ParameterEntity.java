@@ -1,16 +1,16 @@
 package com.logsense.client.entities;
 
-import com.logsense.client.LogSense;
+import com.logsense.client.Json;
 
 public class ParameterEntity implements IEntity {
-	
+
 	private String name;
 	private String type;
 	private String value;
 
 	@Override
 	public String toJson() {
-		return LogSense.gson.toJson(this);
+		return Json.toJson(this);
 	}
 
 	public String getName() {

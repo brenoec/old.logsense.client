@@ -10,23 +10,36 @@ import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 
-import com.google.gson.Gson;
 import com.logsense.client.entities.IEntity;
 
 public class LogSense {
 
-	private String url;
+	private static String url;
 
-	public static final Gson gson = new Gson();
+	private static String system = null;
+	private static String solution = null;
+	private static String component = null;
 
-	public LogSense(String url) {
-		this.url = url;
+	public static boolean configure(String url) {
+		LogSense.url = url;
+
+		return true;
 	}
 
-	public HttpResponse log(IEntity value) throws ClientProtocolException, IOException {
-		StringEntity json = new StringEntity("{\"interaction\":" + gson.toJson(value) + "}");
+	public static boolean configure(String url, String system, String solution, String project) {
+		LogSense.url = url;
 
-		System.out.println("[LogSense][information]\t" + "{\"interaction\":" + gson.toJson(value) + "}");
+		LogSense.system = system;
+		LogSense.solution = solution;
+		LogSense.component = project;
+
+		return true;
+	}
+
+	public static HttpResponse log(IEntity value) throws ClientProtocolException, IOException {
+		StringEntity json = new StringEntity("{\"interaction\":" + Json.toJson(value) + "}");
+
+		System.out.println("[LogSense][information]\t" + "{\"interaction\":" + Json.toJson(value) + "}");
 
 		HttpPost post = new HttpPost(url);
 		post.setEntity(json);
@@ -51,11 +64,19 @@ public class LogSense {
 		return response;
 	}
 
-	public String getUrl() {
+	public static String getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public static String getSystem() {
+		return system;
+	}
+
+	public static String getSolution() {
+		return solution;
+	}
+
+	public static String getComponent() {
+		return component;
 	}
 }

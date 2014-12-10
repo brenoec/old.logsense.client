@@ -1,22 +1,27 @@
 package com.logsense.client.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.logsense.client.LogSense;
+import com.logsense.client.Json;
 
 public class InteractionEntity implements IEntity {
-	
+
 	private String name;
 	private String description;
 	private String status = "";
-	
+
 	private List<LocationEntity> locations;
-	
+
+	public InteractionEntity() {
+		this.locations = new ArrayList<LocationEntity>();
+	}
+
 	@Override
 	public String toJson() {
-		return LogSense.gson.toJson(this);
+		return Json.toJson(this);
 	}
-	
+
 	public String getName() {
 		return name;
 	}

@@ -12,6 +12,11 @@ public class SpecialLocationEntity extends LocationEntity implements IEntity {
 		super.type = LocationTypeEnum.SPECIAL;
 	}
 
+	public SpecialLocationEntity(LocationEntity parent) {
+		super(parent);
+		super.type = LocationTypeEnum.SPECIAL;
+	}
+
 	public String getDescription() {
 		return description;
 	}
